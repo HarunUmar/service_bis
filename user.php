@@ -1,10 +1,8 @@
 <?php 
 
 
-include "database.php";
-
-
-class User extends database{
+include_once "database.php";
+class User extends database {
 
 private $acak = "HARUNUMARAZXCNVKSKIJDIJSIDJ";
 
@@ -96,30 +94,6 @@ public function login ($email, $pass){
 
 
 }
-
-$member  = new User;
-
-
-if(isset($_GET['login'])){
-
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	echo $member->login($email,$password);
-}
-
-else if(isset($_GET['daftar'])){
-
-	$nama = $_POST['nama'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$status = $_POST['status'];
-
-
-	echo $member->daftar($nama,$email,$password,$status);
-}
-
-
-
 
 
 
