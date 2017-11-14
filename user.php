@@ -1,6 +1,5 @@
 <?php 
 
-
 include_once "database.php";
 class User extends database {
 
@@ -11,7 +10,7 @@ public function __construct(){
 	}
 
 
-public function daftar($nama,$email,$pass,$status){
+public function daftar($nama,$email,$no_hp,$pass,$status){
 
 
 		if(empty($nama or $email or $pass or $status)){
@@ -26,7 +25,7 @@ public function daftar($nama,$email,$pass,$status){
 	
 		$password = md5($this->acak. md5($pass) . $this->acak );
 
-		$query= mysql_query("INSERT INTO user VALUES('','$nama','$email','$password','$status')");
+		$query= mysql_query("INSERT INTO user VALUES('','$nama','$email','$no_hp','$password','$status')");
 
 		if($query){
 
@@ -58,10 +57,13 @@ public function login ($email, $pass){
 		if($query) {
 	
 			$row = mysql_fetch_row($query);
-			if (md5($this->acak . md5($pass) . $this->acak) == $row[3]) {
+			if (md5($this->acak . md5($pass) . $this->acak) == $row[4]) {
 
 					$response = array(
-						'success' => '1',
+						'id_user' =>$row[0],
+						'nama' =>$row[1],
+						'email' =>$row[2],
+						'success' => 1,
 						'pesan'	=> 'Login sukses'
 						);
 					return json_encode($response);
@@ -70,7 +72,7 @@ public function login ($email, $pass){
 			else {
 
 					$response = array(
-						'success' => '0',
+						'success' => 0,
 						'pesan'	=> 'email atau password salah'
 						);
 				     return json_encode($response);
@@ -80,7 +82,7 @@ public function login ($email, $pass){
 		else {
 
 			$response = array(
-						'success' => '0',
+						'success' => 0,
 						'pesan'	=> 'gagal login terjadi kesalahan'
 						);
 			return json_encode($response);

@@ -3,9 +3,9 @@
 	class database{
 		
 	private $host = "localhost";
-	private $user = "tarsiust_bsc";
-	private $pass = "bsc010203";
-	private $db = "tarsiust_bis";
+	private $user = "root";
+	private $pass = "";
+	private $db = "bis";
 
 	public function __construct(){
 
